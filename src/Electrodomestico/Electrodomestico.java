@@ -1,25 +1,17 @@
-package TA08_03;
+package Electrodomestico;
 
 public class Electrodomestico {
-	
-	// especificar colores disponibles
-	final private String COLOR_BLANCO = "blanco";
-	final private String COLOR_NEGRO = "negro";
-	final private String COLOR_ROJO = "rojo";
-	final private String COLOR_AZUL = "azul";
-	final private String COLOR_GRIS = "gris";
-	
 
-	final private double PRECIO_POR_DEFECTO = 100;
-	final private String COLOR_POR_DEFECTO = "blanco";
-	final private char CONSUMO_POR_DEFECTO = 'F';
-	final private double PESO_POR_DEFECTO = 5.0;
+	final protected double PRECIO_POR_DEFECTO = 100.0;
+	final protected String COLOR_POR_DEFECTO = "blanco";
+	final protected char CONSUMO_POR_DEFECTO = 'F';
+	final protected double PESO_POR_DEFECTO = 5.0;
 
-	private double precio_base;
-	private String color;
-	private char consumo_energetico;
+	protected double precio_base;
+	protected String color;
+	protected char consumo_energetico;
 	protected double peso;
-	
+
 	public Electrodomestico() {
 		this.precio_base = this.PRECIO_POR_DEFECTO;
 		this.peso = this.PESO_POR_DEFECTO;
@@ -66,26 +58,6 @@ public class Electrodomestico {
 //	public void setColor(String color) {
 //		this.color = color;
 //	}
-	
-	public void setColorBlanco(String color) {
-		this.color = this.COLOR_BLANCO;
-	}
-	
-	public void setColorGris(String color) {
-		this.color = this.COLOR_GRIS;
-	}
-	
-	public void setColorNegro(String color) {
-		this.color = this.COLOR_NEGRO;
-	}
-	
-	public void setColorRojo(String color) {
-		this.color = this.COLOR_ROJO;
-	}
-	
-	public void setColorAzul(String color) {
-		this.color = this.COLOR_AZUL;
-	}
 
 	public void setConsumo_energetico(char consumo_energetico) {
 		this.consumo_energetico = consumo_energetico;
@@ -93,6 +65,82 @@ public class Electrodomestico {
 
 	public void setPeso(double peso) {
 		this.peso = peso;
+	}
+
+	public void comprobarConsumoEnergetico(char letra) {
+
+		if (isLetra(letra)) {
+			this.consumo_energetico = Character.toUpperCase(letra);
+		} else {
+			this.consumo_energetico = this.CONSUMO_POR_DEFECTO;
+		}
+	}
+
+	public void comprobarColor(String color) {
+
+		if (isColor(color)) {
+			this.color = color.toLowerCase();
+		} else {
+			this.color = this.COLOR_POR_DEFECTO;
+		}
+
+	}
+
+	protected boolean isLetra(char letra) {
+		return (Character.toUpperCase(letra) == 'A' || Character.toUpperCase(letra) == 'B'
+				|| Character.toUpperCase(letra) == 'C' || Character.toUpperCase(letra) == 'D'
+				|| Character.toUpperCase(letra) == 'E' || Character.toUpperCase(letra) == 'F');
+	}
+
+	protected boolean isColor(String color) {
+		return (color.toLowerCase() == "rojo" || color.toLowerCase() == "azul" || color.toLowerCase() == "negro"
+				|| color.toLowerCase() == "blanco" || color.toLowerCase() == "gris");
+	}
+
+	public double precioFinal() {
+
+		double precio_consumo = 0.0;
+		double precio_peso = 0.0;
+
+		switch (this.consumo_energetico) {
+		case 'A':
+			precio_consumo = 100.0;
+			break;
+
+		case 'B':
+			precio_consumo = 80.0;
+			break;
+
+		case 'C':
+			precio_consumo = 60.0;
+			break;
+		case 'D':
+			precio_consumo = 50.0;
+			break;
+
+		case 'E':
+			precio_consumo = 30.0;
+			break;
+
+		case 'F':
+			precio_consumo = 10.0;
+			break;
+
+		default:
+			break;
+		}
+
+		if ((19 >= this.peso) && (this.peso >= 0)) {
+			precio_peso = 10.0;
+		} else if ((49 >= this.peso) && (this.peso >= 20)) {
+			precio_peso = 50.0;
+		} else if ((79 >= this.peso) && (this.peso >= 50)) {
+			precio_peso = 80.0;
+		} else if (this.peso >= 80) {
+			precio_peso = 100.0;
+		}
+
+		return this.precio_base + precio_consumo + precio_peso;
 	}
 
 }
