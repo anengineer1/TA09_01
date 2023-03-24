@@ -1,4 +1,4 @@
-package subclases;
+package superclases;
 
 public class Electrodomestico {
 

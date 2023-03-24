@@ -1,6 +1,6 @@
-package superclases;
+package subclases;
 
-import subclases.Electrodomestico;
+import superclases.Electrodomestico;
 
 public class Television extends Electrodomestico {
 
